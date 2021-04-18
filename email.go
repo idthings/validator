@@ -15,7 +15,7 @@ func IsValidEmail(input string) bool {
 		return false // no @ in input
 	}
 
-	var emailUserRegex = regexp.MustCompile("^[a-zA-Z0-9.-]+$")
+	var emailUserRegex = regexp.MustCompile("^[a-zA-Z0-9.-_]+$")
 
 	userSegment := emailSegments[0]
 	if !emailUserRegex.MatchString(userSegment) {

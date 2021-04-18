@@ -25,6 +25,7 @@ func TestValidEmailAddress(t *testing.T) {
 
 	validEmailAddresses := [...]string{
 		"user@domain.com",
+		"underscore_in_name@domain.com",
 	}
 
 	for _, email := range validEmailAddresses {
