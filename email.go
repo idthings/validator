@@ -1,33 +1,38 @@
 package validator
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+	"regexp"
+	"strings"
 )
 
-func TestInvalidEmailAddress(t *testing.T) {
-
-	invalidEmailAddresses := [...]string{
-		"",
-		"missingatsign",
-		"@missing.user",
-		"missing@fqdn",
-		"user@more.than.four.domain.segments",
-		"user@invalidchar+.indomain",
+func IsValidEmail(input string) bool {
+	if len(input) < 3 || len(input) > 254 {
+		return false
 	}
 
-	for _, email := range invalidEmailAddresses {
-		assert.Equal(t, false, IsValidEmail(email), email)
-	}
-}
-
-func TestValidEmailAddress(t *testing.T) {
-
-	validEmailAddresses := [...]string{
-		"user@domain.com",
+	emailSegments := strings.Split(input, "@")
+	if len(emailSegments) < 2 {
+		return false // no @ in input
 	}
 
-	for _, email := range validEmailAddresses {
-		assert.Equal(t, true, IsValidEmail(email), email)
+	var emailUserRegex = regexp.MustCompile("^[a-zA-Z0-9.-]+$")
+
+	userSegment := emailSegments[0]
+	if !emailUserRegex.MatchString(userSegment) {
+		return false
 	}
+
+	var emailDomainRegex = regexp.MustCompile("^[a-zA-Z0-9.-]+$")
+
+	domainSegments := strings.Split(emailSegments[1], ".")
+	if len(domainSegments) < 2 || len(domainSegments) > 4 {
+		return false
+	}
+
+	for _, segment := range domainSegments {
+		if !emailDomainRegex.MatchString(segment) {
+			return false
+		}
+	}
+	return true
 }
