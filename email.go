@@ -15,14 +15,14 @@ func IsValidEmail(input string) bool {
 		return false // no @ in input
 	}
 
-	var emailUserRegex = regexp.MustCompile("^[a-zA-Z0-9.-_]+$")
+	var emailUserRegex = regexp.MustCompile("^[a-zA-Z0-9\\.\\-_]+$")
 
 	userSegment := emailSegments[0]
 	if !emailUserRegex.MatchString(userSegment) {
 		return false
 	}
 
-	var emailDomainRegex = regexp.MustCompile("^[a-zA-Z0-9.-]+$")
+	var emailDomainRegex = regexp.MustCompile("^[a-zA-Z0-9\\.\\-]+$")
 
 	domainSegments := strings.Split(emailSegments[1], ".")
 	if len(domainSegments) < 2 || len(domainSegments) > 4 {

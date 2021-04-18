@@ -14,6 +14,7 @@ func TestInvalidEmailAddress(t *testing.T) {
 		"missing@fqdn",
 		"user@more.than.four.domain.segments",
 		"user@invalidchar+.indomain",
+		"invalidemailstring;@domain.com",
 	}
 
 	for _, email := range invalidEmailAddresses {
