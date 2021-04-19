@@ -1,6 +1,6 @@
 # validator
 
-[![CI](https://github.com/idthings/alphanum/actions/workflows/branches.yaml/badge.svg)](https://github.com/idthings/alphanum/actions/workflows/ci.yaml)
+[![ci](https://github.com/idthings/validator/actions/workflows/ci.yaml/badge.svg)](https://github.com/idthings/validator/actions/workflows/ci.yaml)
 
 A validator module library.
 
